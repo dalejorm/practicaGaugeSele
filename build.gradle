@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group 'org.and'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'com.thoughtworks.gauge', name: 'gauge-java', version: '0.7.13'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version: '3.141.59'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '3.141.59'
+//    compile 'com.thoughtworks.gauge.maven:gauge-maven-plugin:1.4.4'
+//    compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '4.0.0-alpha-6'
+}
