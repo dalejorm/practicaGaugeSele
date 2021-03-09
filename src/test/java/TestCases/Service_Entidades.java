@@ -4,6 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.thoughtworks.gauge.Table;
+import com.thoughtworks.gauge.TableRow;
 import util.Constants;
 import util.CallRest;
 import com.thoughtworks.gauge.Step;
@@ -89,23 +91,36 @@ public class Service_Entidades {
     }
 
     public void val_campos(JsonElement campos) throws Exception {
+        Table tableFields = (Table) globalData.get(Constants.TABLE + "respuestas");
+        List<TableRow> rows = tableFields.getTableRows();
+        List<String> columnNames = tableFields.getColumnNames();
+
         JsonParser parser = new JsonParser();
         JsonArray arraycampos = parser.parse(campos.toString()).getAsJsonArray();
         System.out.println(arraycampos.size());
-        for(JsonElement campo: arraycampos){
-            String dato= null;
-            String valor= null;
-            JsonObject objecyContentMessage = parser.parse(campo.toString()).getAsJsonObject();
-            if(!objecyContentMessage.get("campodato").isJsonNull()){
+
+        for(TableRow tcampo: rows){
+            System.out.println(tcampo.getCell(columnNames.get(0)) +" - "+ tcampo.getCell(columnNames.get(1)));
+            boolean existe = false;
+            for(JsonElement campo: arraycampos) {
+                String dato= null;
+                String valor= null;
+                JsonObject objecyContentMessage = parser.parse(campo.toString()).getAsJsonObject();
                 dato = objecyContentMessage.get("campoDato").getAsString();
+                if(dato.equals(tcampo.getCell(columnNames.get(0)))){
+                    existe = true;
+                    valor = objecyContentMessage.get("valorDato").getAsString();
+                    if(valor.equals(tcampo.getCell(columnNames.get(1)))){
+                        System.out.println("Valor correcto en el campo: " +tcampo.getCell(columnNames.get(0)));
+                        break;
+                    }else{
+                        System.out.println("ERROR, se esperaba: " + tcampo.getCell(columnNames.get(1)) +" pero el servicio retorno: "+ valor);
+                        throw new Exception("");
+                    }
+                }
             }
-            if(!objecyContentMessage.get("valorDato").isJsonNull()){
-                valor = objecyContentMessage.get("valorDato").getAsString();
-            }
-            System.out.println("---------------");
-            System.out.println(dato +": "+ valor);
-            if(dato.isEmpty() || valor.isEmpty()){
-                System.out.println("Algun dato se encuentra vacio, el campo " +dato + "o el valor " + valor);
+            if(existe == false){
+                System.out.println("El servicio no retorna el campo: " + tcampo.getCell(columnNames.get(0)));
                 throw new Exception("");
             }
         }

@@ -7,5 +7,6 @@ public class Constants {
     public static final String ENTIDAD = "entidad";
     public static final String ISREST = "False";
     public static final String RESPONSE_SERVICE = "null";
+    public static final String TABLE = "table";
 
 }
