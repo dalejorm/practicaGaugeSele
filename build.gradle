@@ -14,6 +14,8 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version: '3.141.59'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '3.141.59'
+    compile 'commons-httpclient:commons-httpclient:3.1'
+    compile 'com.google.code.gson:gson:2.8.6'
 //    compile 'com.thoughtworks.gauge.maven:gauge-maven-plugin:1.4.4'
 //    compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '4.0.0-alpha-6'
 }

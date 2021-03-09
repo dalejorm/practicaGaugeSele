@@ -1,7 +1,6 @@
 package TestCases;
 
 import com.thoughtworks.gauge.Step;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -54,7 +53,7 @@ public class loginCCD {
 
     @Step("Then el usuario observa mensaje de usuario no registrado")
     public void el_observa_mensaje_de_usuario_no_registrado() {
-        WebElement alertFaild = new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='El ID Usuario no se encuentra registrado']")));
+        WebElement alertFaild = new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='El usuario no se encuentra registrado']")));
     }
 }
 

@@ -1,43 +1,58 @@
 package util;
 
-import com.thoughtworks.gauge.AfterScenario;
-import com.thoughtworks.gauge.AfterSuite;
-import com.thoughtworks.gauge.BeforeScenario;
-import com.thoughtworks.gauge.BeforeSuite;
+import com.thoughtworks.gauge.*;
+import com.thoughtworks.gauge.datastore.DataStore;
+import com.thoughtworks.gauge.datastore.DataStoreFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import util.FileManager;
+import util.Constants;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class Driver {
     //    private static final String DEFAULT_BROWSER = "firefox";
     //    private static final String DEFAULT_BROWSER = "chrome";
     private static WebDriver driver;
+    FileManager fileManager = new FileManager();
 
     @BeforeSuite
-    public void setupSuite() {
+    public void setupSuite() throws IOException {
+        String isREST = fileManager.readProperties();
         if(driver!=null){
-            createNavigator();
+            if(isREST.equals("False")){
+                createNavigator();
+            }
         }else{
             System.out.println("Ya creado");
         }
-
     }
+
     @BeforeScenario()
-    public void setupSuite2(){
+    public void setupSuite2() throws IOException {
+        String isREST = fileManager.readProperties();
         if(driver!=null){
             System.out.println("Abierto");
         }else{
             System.out.println("Cerrado");
-            createNavigator();
+            System.out.println(isREST);
+            if(isREST.equals("False")){
+                createNavigator();
+            }
         }
     }
 
     @AfterScenario
     public void tearDown2(){
         System.out.println("Cerrado Escenario");
-        driver.close();
-        driver=null;
+        if(driver == null){
+            System.out.println("ya esta cerrado");
+            driver=null;
+        } else{
+            driver.close();
+            driver=null;
+        }
     }
 
     @AfterSuite

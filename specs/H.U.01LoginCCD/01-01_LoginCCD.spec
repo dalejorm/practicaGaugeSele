@@ -14,5 +14,11 @@ Scenario Funcionalidad de login incorrecto
 --------------------------
 * Given que el usuario quiere loguearse en CCD
 * When el activa la opcion de ingresar
-* And el complementa formulario con "1053820711faild"
+* And el complementa formulario con "10538204569"
 * Then el usuario observa mensaje de usuario no registrado
+
+//Scenario Funcionalidad de login correcto
+//--------------------------
+//* Given que el usuario "IGAC" quiero consultar el servicio de tramite
+//* When el consuma el recurso rest ""
+//* Then el servicio me retorna "" información
