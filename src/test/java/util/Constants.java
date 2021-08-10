@@ -6,7 +6,10 @@ public class Constants {
     public static final String HEADERS_SERVICE = "headers_service";
     public static final String ENTIDAD = "entidad";
     public static final String ISREST = "False";
+    public static final String entornoWeb = "entornoWeb";
+    public static final String entornoService = "entornoService";
     public static final String RESPONSE_SERVICE = "null";
     public static final String TABLE = "table";
+    public static final String NAVEGADOR = "navegador";
 
 }

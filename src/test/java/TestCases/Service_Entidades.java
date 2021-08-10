@@ -34,7 +34,9 @@ public class Service_Entidades {
         String entidad = globalData.get(Constants.ENTIDAD).toString();
         String headers = globalData.get(Constants.HEADERS_SERVICE).toString();
         String servicio = globalData.get(Constants.REST_SERVICE).toString();
-        String URL = servicio+usuario;
+        String entorno = globalData.get(Constants.entornoService).toString();
+        String URL = entorno+servicio+usuario;
+        System.out.println("entorno test1 " + URL);
         Map<String, String> requestHeader = new HashMap<>();
         String [] header = headers.split(";");
         if(header.length > 1){

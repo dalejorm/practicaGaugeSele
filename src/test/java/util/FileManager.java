@@ -13,15 +13,21 @@ public class FileManager {
     private DataStore globalData = DataStoreFactory.getSpecDataStore();
 
 
-    public String readProperties() throws IOException {
+    public void readProperties() throws IOException {
         Properties propiedades = new Properties();
         FileInputStream in = null;
 
         in = readProperties("env/ccd-test.properties");
         propiedades.load(in);
         String estado = propiedades.getProperty("isRest");
+        String entornoWeb = propiedades.getProperty("entornoWeb");
+        String entornoService = propiedades.getProperty("entornoService");
+        String navegador = propiedades.getProperty("navegador");
         globalData.put(Constants.ISREST,estado);
-        return estado;
+        globalData.put(Constants.entornoWeb,entornoWeb);
+        globalData.put(Constants.entornoService,entornoService);
+        globalData.put(Constants.NAVEGADOR,navegador);
+
     }
 
     /**
