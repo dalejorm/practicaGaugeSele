@@ -35,10 +35,10 @@ public class loginCCD {
     @Step("And el complementa formulario con <>")
     public void el_complementa_formulario_con_ad(String usuario) {
         // Write code here that turns the phrase above into concrete actions
-        WebElement selectElement = driver.findElement(By.id("Input_TipoIdentificacion"));
+        WebElement selectElement = driver.findElement(By.id("idType"));
         Select selectObject = new Select(selectElement);
         selectObject.selectByValue("CC");
-        driver.findElement(By.id("Input_Identificacion")).sendKeys(usuario);
+        driver.findElement(By.id("idInput")).sendKeys(usuario);
         driver.findElement(By.id("loginbutton")).click();
     }
 
@@ -51,8 +51,8 @@ public class loginCCD {
     @Step("Then el usuario <> se logea y observa las opciones de CCD")
     public void el_se_logea_y_observa_las_opciones_de_ccd(String usuario) {
         // Write code here that turns the phrase above into concrete actions
-        WebElement divtxt = new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='dropdownBasic2']//div[@class='text-left']")));
-        String txtdiv = driver.findElement(By.xpath("//button[@id='dropdownBasic2']//div[@class='text-left']")).getText();
+        WebElement divtxt = new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='dropdownBasic2']//div[@class='text-left text-user']")));
+        String txtdiv = driver.findElement(By.xpath("//button[@id='dropdownBasic2']//div[@class='text-left text-user']")).getText();
         System.out.println("texto div " + txtdiv );
         if(txtdiv.contains("CC."+usuario)){
             System.out.println("Login usuario correcto");
@@ -64,7 +64,14 @@ public class loginCCD {
 
     @Step("Then el usuario observa mensaje de usuario no registrado")
     public void el_observa_mensaje_de_usuario_no_registrado() {
-        WebElement alertFaild = new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//li[text()='El usuario no se encuentra registrado']")));
+        WebElement alertFaild = new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='alertLogin']//div[@class='alert-line alert-line-error']")));
+        String textalert = driver.findElement(By.xpath("//div[@id='alertLogin']//div[@class='alert-line alert-line-error']")).getText();
+        System.out.println("texto alerta " + textalert );
+        if(textalert.contains("El usuario no se encuentra registrado")){
+            System.out.println("Alerta correcta, login no realizado");
+        }else{
+            System.out.println("Alerta incorrecta");
+        }
     }
 }
 
